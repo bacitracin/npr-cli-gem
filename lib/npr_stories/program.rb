@@ -1,5 +1,4 @@
 class NprStories::Program
-  #think of a better class name. feel like program is kind of confusing. radio show?
 
   def self.all
 
