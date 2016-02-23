@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
+#gemspec
 gem 'pry'
 gem 'nokogiri'
-gem 'open-uri'
-gem 'json'
-
+gem 'webmock'
+gem 'vcr'

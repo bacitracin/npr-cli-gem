@@ -33,15 +33,25 @@ class NprStories::CLI
       program_choice = gets.strip
       case program_choice
         when "1"
-        puts "More information about All Things Considered..." #will return an array of recent stories, which are going to each be hashes
+        @atc_stories = NprStories::StoryScraper.pull_stories(ALL_THINGS_CONSIDERED)
         when "2"
-          puts "More information about Fresh Air..."
+          @ama_stories = NprStories::StoryScraper.pull_stories(ASK_ME_ANOTHER)
         when "3"
-          puts "More information about Morning Edition..."
+          @fresh_air_stories = NprStories::StoryScraper.pull_stories(FRESH_AIR)
         when "4"
-          puts "More information about Selected Shorts..."
+          @here_and_now_stories = NprStories::StoryScraper.pull_stories(HERE_AND_NOW)
         when "5"
-          puts "More information about The Diane Rehm Show..."
+          @latino_usa_stories = NprStories::StoryScraper.pull_stories(LATINO_USA)
+        when "6"
+          @morning_edition_stories = NprStories::StoryScraper.pull_stories(MORNING_EDITION)
+        when "7"
+          @ted_radio_hour_stories = NprStories::StoryScraper.pull_stories(TED_RADIO_HOUR)
+        when "8"
+          @wait_wait_stories = NprStories::StoryScraper.pull_stories(WAIT_WAIT)
+        when "9"
+          @weekend_edition_sat_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SATURDAY)
+        when "10"
+          @weekend_edition_sun_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SUNDAY)
         when 'menu'
           list_programs
         when 'exit'
