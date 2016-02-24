@@ -64,8 +64,9 @@ class NprStories::CLI
           puts "Oops, that's not a valid command. Please try again."
         end
       if program_choice.to_i <= 10 && program_choice.to_i >= 1
-        story_result = NprStories::Scraper.new(program).pull_latest_story
-        display_story(story_result)
+        story_result = NprStories::Scraper.new(program).pull_stories
+        binding.pry
+        #display_story(story_result)
       end
     end
   end

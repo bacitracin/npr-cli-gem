@@ -1,7 +1,7 @@
 # NPR story search that limits results to 5 stories. Using this NPR account's key: tracetrace@gmail.com
 # Results come back as XML/NPRML, other options including JSON available. More info @ http://www.npr.org/api/inputReference.php
 
-BASE_URL = 'http://api.npr.org/query?apiKey=MDIyODk1NDk0MDE0NTYxNzg5NTdkYjVhZA000&numResults=5&id='
+BASE_URL = 'http://api.npr.org/query?apiKey=MDIyODk1NDk0MDE0NTYxNzg5NTdkYjVhZA000&numResults=5&id=2'
 
 # NPR Program ID Numbers, surprisingly only these 10 shows are offered via the API
 ALL_THINGS_CONSIDERED = '2'
@@ -25,16 +25,14 @@ class NprStories::Scraper
     array_of_stories = []
     api_query = BASE_URL + @name
     @doc = Nokogiri::XML(open(api_query))
-    @stories = @doc.xpath('//story') # @stories is an array of 5 Nokogiri story objects
-
-    @stories.each do |story|
-      story_title = @doc.css('title').text,
-      program_title = @doc.css('program').text,
-      story_date = @doc.css('storyDate').text,
-      teaser = @doc.css('teaser').text,
-      story_url = @doc.css('link').text,
-      topic = @doc.css('slug').text
-
+    @stories = @doc.xpath('*//story') # @stories is an array of 5 Nokogiri story objects
+    stories.each do |story|
+      story_title = story.at_css('title').text, #uses at_css instead of .first
+      program_title = story.css('program')[0].text,
+      story_date = story.css('storyDate')[0].text,
+      teaser = story.css('teaser')[0].text,
+      story_url = story.css('link')[0].text,
+      topic = story.css('slug')[0].text
       array_of_stories << {story_title: story_title, program_title: program_title, story_date: story_date, teaser: teaser, story_url: story_url, topic: topic}
     end
     array_of_stories

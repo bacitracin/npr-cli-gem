@@ -1,0 +1,23 @@
+
+[1mFrom:[0m /home/nitrous/code/labs/npr-cli-gem/lib/npr_stories/scraper.rb @ line 30 NprStories::Scraper#pull_stories:
+
+    [1;34m24[0m: [32mdef[0m [1;34mpull_stories[0m
+    [1;34m25[0m:   array_of_stories = []
+    [1;34m26[0m:   api_query = [1;34;4mBASE_URL[0m + @name
+    [1;34m27[0m:   @doc = [1;34;4mNokogiri[0m::XML(open(api_query))
+    [1;34m28[0m:   @stories = @doc.xpath([31m[1;31m'[0m[31m//story[1;31m'[0m[31m[0m) [1;34m# @stories is an array of 5 Nokogiri story objects[0m
+    [1;34m29[0m:   puts @stories
+ => [1;34m30[0m:   binding.pry
+    [1;34m31[0m:   @stories.each [32mdo[0m |story|
+    [1;34m32[0m:     story_title = @doc.css([31m[1;31m'[0m[31mtitle[1;31m'[0m[31m[0m).text,
+    [1;34m33[0m:     program_title = @doc.css([31m[1;31m'[0m[31mprogram[1;31m'[0m[31m[0m).text,
+    [1;34m34[0m:     story_date = @doc.css([31m[1;31m'[0m[31mstoryDate[1;31m'[0m[31m[0m).text,
+    [1;34m35[0m:     teaser = @doc.css([31m[1;31m'[0m[31mteaser[1;31m'[0m[31m[0m).text,
+    [1;34m36[0m:     story_url = @doc.css([31m[1;31m'[0m[31mlink[1;31m'[0m[31m[0m).text,
+    [1;34m37[0m:     topic = @doc.css([31m[1;31m'[0m[31mslug[1;31m'[0m[31m[0m).text
+    [1;34m38[0m: 
+    [1;34m39[0m:     array_of_stories << {[35mstory_title[0m: story_title, [35mprogram_title[0m: program_title, [35mstory_date[0m: story_date, [35mteaser[0m: teaser, [35mstory_url[0m: story_url, [35mtopic[0m: topic}
+    [1;34m40[0m:   [32mend[0m
+    [1;34m41[0m:   array_of_stories
+    [1;34m42[0m: [32mend[0m
+
