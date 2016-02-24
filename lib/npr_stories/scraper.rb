@@ -15,24 +15,26 @@ WAIT_WAIT = '35'
 WEEKEND_EDITION_SATURDAY = '7'
 WEEKEND_EDITION_SUNDAY = '10'
 
-class NprStories::StoryScraper
+class NprStories::Scraper
 
-  def initialize(name='')
+  def initialize(name) #should use a variable
     @name = name
   end
 
   def pull_latest_story
-      api_query = BASE_URL + @name
-      @doc = Nokogiri::XML(open(api_query))
+    api_query = BASE_URL + @name
+    @doc = Nokogiri::XML(open(api_query))
+    latest_story = {
+      story_title: @doc.css('title')[1].text,
+      program_title: @doc.css('program')[1].text,
+      story_date: @doc.css('storyDate')[1].text,
+      teaser: @doc.css('teaser')[1].text,
+      story_url: @doc.css('link')[1].text,
+      topic: @doc.css('slug')[1].text
+      }
+  end
 
-      latest_story = {
-        story_title: @doc.css('title')[1].text,
-        program_title: @doc.css('program')[1].text,
-        story_date: @doc.css('storyDate')[1].text,
-        teaser: @doc.css('teaser')[1].text,
-        story_url: @doc.css('link')[1].text,
-        topic: @doc.css('slug')[1].text
-        }
-    end
+  def pull_stories
+  end
 
 end

@@ -31,27 +31,27 @@ class NprStories::CLI
     while program_choice != 'exit'
       puts "Please select a radio show from the list, or type 'exit' in order to leave this program. Type 'menu' to see your options again"
       program_choice = gets.strip
-      case program_choice
-        when "1"
-        #@atc_stories = NprStories::StoryScraper.pull_stories(ALL_THINGS_CONSIDERED)
-        when "2"
-          #@ama_stories = NprStories::StoryScraper.pull_stories(ASK_ME_ANOTHER)
-        when "3"
-          #@fresh_air_stories = NprStories::StoryScraper.pull_stories(FRESH_AIR)
-        when "4"
-          #@here_and_now_stories = NprStories::StoryScraper.pull_stories(HERE_AND_NOW)
-        when "5"
-          #@latino_usa_stories = NprStories::StoryScraper.pull_stories(LATINO_USA)
-        when "6"
-          #@morning_edition_stories = NprStories::StoryScraper.pull_stories(MORNING_EDITION)
-        when "7"
-          #@ted_radio_hour_stories = NprStories::StoryScraper.pull_stories(TED_RADIO_HOUR)
-        when "8"
-          #@wait_wait_stories = NprStories::StoryScraper.pull_stories(WAIT_WAIT)
-        when "9"
-          #@weekend_edition_sat_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SATURDAY)
-        when "10"
-          #@weekend_edition_sun_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SUNDAY)
+        case program_choice
+        when '1'
+          program = ALL_THINGS_CONSIDERED
+        when '2'
+          program = ASK_ME_ANOTHER
+        when '3'
+          program = FRESH_AIR
+        when '4'
+          program = HERE_AND_NOW
+        when '5'
+          program = LATINO_USA
+        when '6'
+          program = MORNING_EDITION
+        when '7'
+          program = TED_RADIO_HOUR
+        when '8'
+          program = WAIT_WAIT
+        when '9'
+          program = WEEKEND_EDITION_SATURDAY
+        when '10'
+          program = WEEKEND_EDITION_SUNDAY
         when 'menu'
           list_programs
         when 'exit'
@@ -59,7 +59,22 @@ class NprStories::CLI
         else
           puts "Oops, that's not a valid command. Please try again."
         end
+      story_result = NprStories::Scraper.new(program).pull_latest_story
+      display_story(story_result)
     end
+  end
+
+  def display_story(story_result)
+    puts <<-DOC
+
+      Story Title: #{story_result[:story_title]}
+      Program: #{story_result[:program_title]}
+      Date: #{story_result[:story_date]}
+      Teaser: #{story_result[:teaser]}
+      Url: #{story_result[:story_url]}
+      Main Topic: #{story_result[:topic]}
+
+    DOC
   end
 
   def exit_npr_stories
