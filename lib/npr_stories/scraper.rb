@@ -22,12 +22,27 @@ class NprStories::Scraper
   end
 
   def pull_stories
+    array_of_stories = []
     api_query = BASE_URL + @name
     @doc = Nokogiri::XML(open(api_query))
+    @stories = @doc.xpath('//story') # @stories is an array of 5 Nokogiri story objects
+
+    @stories.each do |story|
+      story_title = @doc.css('title').text,
+      program_title = @doc.css('program').text,
+      story_date = @doc.css('storyDate').text,
+      teaser = @doc.css('teaser').text,
+      story_url = @doc.css('link').text,
+      topic = @doc.css('slug').text
+
+      array_of_stories << {story_title: story_title, program_title: program_title, story_date: story_date, teaser: teaser, story_url: story_url, topic: topic}
+    end
+    array_of_stories
   end
 
   def pull_latest_story
-    pull_stories
+    api_query = BASE_URL + @name
+    @doc = Nokogiri::XML(open(api_query))
     latest_story = {
       story_title: @doc.css('title')[1].text,
       program_title: @doc.css('program')[1].text,
