@@ -17,8 +17,12 @@ WEEKEND_EDITION_SUNDAY = '10'
 
 class NprStories::StoryScraper
 
-  def pull_latest_story(program)
-      api_query = BASE_URL + program
+  def initialize(name='')
+    @name = name
+  end
+
+  def pull_latest_story
+      api_query = BASE_URL + @name
       @doc = Nokogiri::XML(open(api_query))
 
       latest_story = {
