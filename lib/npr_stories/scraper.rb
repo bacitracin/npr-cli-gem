@@ -1,9 +1,9 @@
 # NPR story search that limits results to 5 stories. Using this NPR account's key: tracetrace@gmail.com
-# Results come back as XML, other options including JSON available. More info here http://www.npr.org/api/inputReference.php
+# Results come back as XML/NPRML, other options including JSON available. More info @ http://www.npr.org/api/inputReference.php
 
 BASE_URL = 'http://api.npr.org/query?apiKey=MDIyODk1NDk0MDE0NTYxNzg5NTdkYjVhZA000&numResults=5&id='
 
-# PROGRAM ID Numbers, surprisingly only these 10 shows are offered via the API
+# NPR Program ID Numbers, surprisingly only these 10 shows are offered via the API
 ALL_THINGS_CONSIDERED = '2'
 ASK_ME_ANOTHER = '58'
 FRESH_AIR = '13'
@@ -17,7 +17,7 @@ WEEKEND_EDITION_SUNDAY = '10'
 
 class NprStories::Scraper
 
-  def initialize(name) #Variable
+  def initialize(name)
     @name = name
   end
 

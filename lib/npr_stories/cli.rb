@@ -13,6 +13,7 @@ class NprStories::CLI
   def list_programs
     puts <<-DOC
     Information on the following NPR programs is available.
+
       1.  All Things Considered
       2.  Ask Me Another
       3.  Fresh Air
@@ -23,14 +24,16 @@ class NprStories::CLI
       8.  Wait Wait ... Don't Tell Me!
       9.  Weekend Edition Saturday
       10. Weekend Edition Sunday
+
     DOC
   end
 
   def choose_program
     program_choice = nil
     until program_choice == 'exit'
-      puts "Please select a radio show from the list, or type 'exit' in order to leave this program. Type 'menu' to see your options again"
-      program_choice = gets.strip
+      puts "Please select a show by number. Type 'menu' to see your options again, and 'exit' to leave the program."
+
+      program_choice = gets.strip.downcase
         case program_choice
         when '1'
           program = ALL_THINGS_CONSIDERED
