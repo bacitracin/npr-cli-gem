@@ -1,5 +1,0 @@
-class NprStories::Program
-
-
-
-end

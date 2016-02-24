@@ -33,25 +33,25 @@ class NprStories::CLI
       program_choice = gets.strip
       case program_choice
         when "1"
-        @atc_stories = NprStories::StoryScraper.pull_stories(ALL_THINGS_CONSIDERED)
+        #@atc_stories = NprStories::StoryScraper.pull_stories(ALL_THINGS_CONSIDERED)
         when "2"
-          @ama_stories = NprStories::StoryScraper.pull_stories(ASK_ME_ANOTHER)
+          #@ama_stories = NprStories::StoryScraper.pull_stories(ASK_ME_ANOTHER)
         when "3"
-          @fresh_air_stories = NprStories::StoryScraper.pull_stories(FRESH_AIR)
+          #@fresh_air_stories = NprStories::StoryScraper.pull_stories(FRESH_AIR)
         when "4"
-          @here_and_now_stories = NprStories::StoryScraper.pull_stories(HERE_AND_NOW)
+          #@here_and_now_stories = NprStories::StoryScraper.pull_stories(HERE_AND_NOW)
         when "5"
-          @latino_usa_stories = NprStories::StoryScraper.pull_stories(LATINO_USA)
+          #@latino_usa_stories = NprStories::StoryScraper.pull_stories(LATINO_USA)
         when "6"
-          @morning_edition_stories = NprStories::StoryScraper.pull_stories(MORNING_EDITION)
+          #@morning_edition_stories = NprStories::StoryScraper.pull_stories(MORNING_EDITION)
         when "7"
-          @ted_radio_hour_stories = NprStories::StoryScraper.pull_stories(TED_RADIO_HOUR)
+          #@ted_radio_hour_stories = NprStories::StoryScraper.pull_stories(TED_RADIO_HOUR)
         when "8"
-          @wait_wait_stories = NprStories::StoryScraper.pull_stories(WAIT_WAIT)
+          #@wait_wait_stories = NprStories::StoryScraper.pull_stories(WAIT_WAIT)
         when "9"
-          @weekend_edition_sat_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SATURDAY)
+          #@weekend_edition_sat_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SATURDAY)
         when "10"
-          @weekend_edition_sun_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SUNDAY)
+          #@weekend_edition_sun_stories = NprStories::StoryScraper.pull_stories(WEEKEND_EDITION_SUNDAY)
         when 'menu'
           list_programs
         when 'exit'
