@@ -28,7 +28,7 @@ class NprStories::CLI
 
   def choose_program
     program_choice = nil
-    while program_choice != 'exit'
+    until program_choice == 'exit'
       puts "Please select a radio show from the list, or type 'exit' in order to leave this program. Type 'menu' to see your options again"
       program_choice = gets.strip
         case program_choice
@@ -56,11 +56,14 @@ class NprStories::CLI
           list_programs
         when 'exit'
           exit_npr_stories
+          break
         else
           puts "Oops, that's not a valid command. Please try again."
         end
-      story_result = NprStories::Scraper.new(program).pull_latest_story
-      display_story(story_result)
+      if program_choice.to_i <= 10 && program_choice.to_i >= 1
+        story_result = NprStories::Scraper.new(program).pull_latest_story
+        display_story(story_result)
+      end
     end
   end
 
