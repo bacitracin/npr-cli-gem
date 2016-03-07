@@ -1,13 +1,17 @@
 class NprStories::CLI
 
-  def call
+  def call #starts up program win bin/npr_stories command in cli
     greeting
     list_programs
     choose_program
   end
 
-  def greeting #moved greeting into its own method because it seemed silly to say welcome every time you see the menu
+  def greeting
     puts "Welcome to NPR!"
+  end
+
+  def exit_npr_stories
+    puts "Now exiting the program. See you later!"
   end
 
   def list_programs
@@ -32,7 +36,6 @@ class NprStories::CLI
     program_choice = nil
     until program_choice == 'exit'
       puts "Please select a show by number. Type 'menu' to see your options again, and 'exit' to leave the program."
-
       program_choice = gets.strip.downcase
         case program_choice
         when '1'
@@ -59,33 +62,30 @@ class NprStories::CLI
           list_programs
         when 'exit'
           exit_npr_stories
-          break
+          #break
         else
           puts "Oops, that's not a valid command. Please try again."
         end
+
       if program_choice.to_i <= 10 && program_choice.to_i >= 1
-        story_result = NprStories::Scraper.new(program).pull_stories
-        binding.pry
-        #display_story(story_result)
+        story_result = NprStories::Scraper.new(program).pull_stories  #story_result should be an array
+        display_story(story_result)
       end
     end
   end
 
   def display_story(story_result)
-    puts <<-DOC
+      story_result.each_with_index do |story, index|
+        puts "Story # #{index + 1}"
+        puts "Story Title: #{story[:story_title]}"
+        puts "Program: #{story[:program_title]}"
+        puts "Date: #{story[:story_date]}"
+        puts "Teaser: #{story[:teaser]}"
+        puts "Url: #{story[:story_url]}"
+        puts "Main Topic: #{story[:topic]}"
 
-      Story Title: #{story_result[:story_title]}
-      Program: #{story_result[:program_title]}
-      Date: #{story_result[:story_date]}
-      Teaser: #{story_result[:teaser]}
-      Url: #{story_result[:story_url]}
-      Main Topic: #{story_result[:topic]}
-
-    DOC
-  end
-
-  def exit_npr_stories
-    puts "Now exiting the program. See you later!"
+        puts "------------------------------"
+      end
   end
 
 end
