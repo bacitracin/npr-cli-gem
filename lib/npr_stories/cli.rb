@@ -75,15 +75,14 @@ class NprStories::CLI
   end
 
   def display_story(story_result)
+      puts "Recent Stories For: #{story_result[0][:program_title]}"
       story_result.each_with_index do |story, index|
-        puts "Story # #{index + 1}"
+        puts "Story ##{index + 1}"
         puts "Story Title: #{story[:story_title]}"
-        puts "Program: #{story[:program_title]}"
         puts "Date: #{story[:story_date]}"
         puts "Teaser: #{story[:teaser]}"
         puts "Url: #{story[:story_url]}"
         puts "Main Topic: #{story[:topic]}"
-
         puts "------------------------------"
       end
   end
